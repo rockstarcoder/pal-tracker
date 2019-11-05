@@ -9,6 +9,10 @@ public class WelcomeController {
 
     private String welcomeMessage;
 
+    /**
+     * Just documents
+     * @param welcomeMessage
+     */
     public WelcomeController(@Value("${welcome.message}") String welcomeMessage){
         this.welcomeMessage = welcomeMessage;
     }
