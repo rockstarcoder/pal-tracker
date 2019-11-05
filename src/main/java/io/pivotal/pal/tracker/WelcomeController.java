@@ -10,7 +10,7 @@ public class WelcomeController {
     private String welcomeMessage;
 
     /**
-     * Just documents
+     * Just documents, with more words
      * @param welcomeMessage
      */
     public WelcomeController(@Value("${welcome.message}") String welcomeMessage){
