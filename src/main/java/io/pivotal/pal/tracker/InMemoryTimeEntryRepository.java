@@ -10,6 +10,7 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository {
     private long id = 0L;
     private Map<Long, TimeEntry> repository = new HashMap<Long, TimeEntry>();
 
+    @Override
     public TimeEntry create(TimeEntry timeEntry) {
         id++;
         timeEntry.setId(id);
@@ -17,15 +18,18 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository {
         return timeEntry;
     }
 
-    public TimeEntry find(long timeEntryId) {
+    @Override
+    public TimeEntry find(Long timeEntryId) {
         return repository.get(timeEntryId);
     }
 
+    @Override
     public List<TimeEntry> list() {
         return new ArrayList<TimeEntry>(repository.values());
     }
 
-    public TimeEntry update(long timeEntryId, TimeEntry newTimeEntry) {
+    @Override
+    public TimeEntry update(Long timeEntryId, TimeEntry newTimeEntry) {
         TimeEntry existing = repository.get(timeEntryId);
         if (existing != null) {
             existing.setDate(newTimeEntry.getDate());
@@ -36,9 +40,8 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository {
         return existing;
     }
 
-    public TimeEntry delete(long timeEntryId) {
-        TimeEntry toRemove = repository.get(timeEntryId);
+    @Override
+    public void delete(Long timeEntryId) {
         repository.remove(timeEntryId);
-        return toRemove;
     }
 }
