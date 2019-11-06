@@ -61,7 +61,8 @@ public class TimeEntryController {
     @GetMapping("/time-entries")
     public ResponseEntity<List<TimeEntry>> list() {
         actionCounter.increment();
-        timeEntrySummary.record(timeEntryRepository.list().size());
-        return ResponseEntity.ok(timeEntryRepository.list());
+        List<TimeEntry> entries = timeEntryRepository.list();
+        timeEntrySummary.record(entries.size());
+        return ResponseEntity.ok(entries);
     }
 }
