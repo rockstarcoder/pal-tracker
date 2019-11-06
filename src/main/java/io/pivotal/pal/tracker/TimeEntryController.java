@@ -55,14 +55,13 @@ public class TimeEntryController {
     public ResponseEntity delete(@PathVariable long id) {
         actionCounter.increment();
         timeEntryRepository.delete(id);
+        timeEntrySummary.record(timeEntryRepository.list().size());
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/time-entries")
     public ResponseEntity<List<TimeEntry>> list() {
         actionCounter.increment();
-        List<TimeEntry> entries = timeEntryRepository.list();
-        timeEntrySummary.record(entries.size());
-        return ResponseEntity.ok(entries);
+        return ResponseEntity.ok(timeEntryRepository.list());
     }
 }
